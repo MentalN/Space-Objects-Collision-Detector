@@ -63,3 +63,7 @@ bool   SpaceObject::operator==(const SpaceObject& SpObj){
     else
         return false;
 }
+
+SpaceObject::~SpaceObject()
+{
+}
