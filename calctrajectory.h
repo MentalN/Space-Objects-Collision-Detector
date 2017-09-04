@@ -14,7 +14,6 @@ public:
     void TakeObjectParameters(double, double, double, double);
     void NoForceTrajectory();
     void ApplyForce(double, double, double, int, int);
-    //void ResetCalculator();
     void CleanUpWhendone();
     //Getters
     double GetXPoints(int);
