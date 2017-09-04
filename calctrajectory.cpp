@@ -40,32 +40,24 @@ void calcTrajectory::NoForceTrajectory(){
     for(int i = 0; i <= ArraySize; i++){
         Xcoords[i] = vo*cos(bear*0.0174533)*cos(elev*0.0174533)*i + xi;
         Ycoords[i] = vo*sin(bear*0.0174533)*cos(elev*0.0174533)*i + yi;
-        Zcoords[i] = vo*sin(elev*0.0174533)*i - 0.5*g*pow(i,2)   + zi;
+        Zcoords[i] = vo*sin(elev*0.0174533)*i - 0.5*g*pow(i,2)    + zi;
     }
 }
 void calcTrajectory::ApplyForce(double fx, double fy, double fz, int ti, int tf){
     ts = ti;
     for(ti; ti <= tf; ti++){
-        dt = ts - ti;
+        dt = ti - ts;
         Xcoords[ti] = Xcoords[ti] + 0.5*(fx/m)*pow(dt,2);
         Ycoords[ti] = Ycoords[ti] + 0.5*(fy/m)*pow(dt,2);
         Zcoords[ti] = Zcoords[ti] + 0.5*(fz/m)*pow(dt,2);
     }
-}
-
-/*
-//Problems here
-///Forces dt is not correctly defined
-///Didn't account for no force intervals
-void calcTrajectory::ApplyForce(double fx, double fy, double fz, int ti, int tf){
-    for (ti; ti <= tf; ti++) {
-        Xcoords[ti] = vo*cos(bear*0.0174533)*cos(elev*0.0174533)*ti + 0.5*(fx/m)*pow(ti,2) + xi;
-        Ycoords[ti] = vo*sin(bear*0.0174533)*cos(elev*0.0174533)*ti + 0.5*(fy/m)*pow(ti,2) + yi;
-        Zcoords[ti] = vo*sin(elev*0.0174533)*ti - 0.5*g*pow(ti,2)   + 0.5*(fz/m)*pow(ti,2) + zi;
+    tf++;
+    for(tf; tf <= ArraySize; tf++){
+        Xcoords[tf] = Xcoords[tf] + 0.5*(fx/m)*pow(dt,2);
+        Ycoords[tf] = Ycoords[tf] + 0.5*(fy/m)*pow(dt,2);
+        Zcoords[tf] = Zcoords[tf] + 0.5*(fz/m)*pow(dt,2);
     }
 }
-*/
-//void calcTrajectory::ResetCalculator(){t = 0;}
 void calcTrajectory::CleanUpWhendone(){
     delete[] Xcoords;
     Xcoords = NULL;
