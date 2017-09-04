@@ -46,6 +46,7 @@ int main(){
         bearing   = SpaceObjects[i].GetBearingAngle();
         mass      = SpaceObjects[i].GetMass();
         Calculator.TakeObjectParameters(velocity, elevation, bearing, mass);
+        Calculator.NoForceTrajectory();
         cout << "Apply forces (y/n)? "; cin >> ForceSwitch1;
         if(ForceSwitch1 == 'y'){
             while(1){
@@ -59,8 +60,6 @@ int main(){
                     break;
             }
         }
-        else
-            Calculator.ApplyForce(0, 0, 0, 0, SimTime);
     }
 
     for(int i = 0; i < NumObjects; i++){
