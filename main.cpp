@@ -60,11 +60,11 @@ int main(){
             }
         }
         else
-            Calculator.ApplyForce(0,0,0,0,SimTime);
+            Calculator.ApplyForce(0, 0, 0, 0, SimTime);
     }
 
     for(int i = 0; i < NumObjects; i++){
-        for(int j = 0; j < SimTime; j++){
+        for(int j = 0; j <= SimTime; j++){
             cout << " >" << j << "  " << Calculator.GetXPoints(j) << endl;
         }
     }
