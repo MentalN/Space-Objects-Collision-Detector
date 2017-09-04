@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include "spaceobject.h"
 #include "calctrajectory.h"
@@ -12,7 +13,7 @@ int main(){
     std::vector<SpaceObject> SpaceObjects;
     SpaceObjects.resize(NumObjects);
     cout << "Enter time duration of the simulation > "; cin  >> SimTime; Calculator.SetTimeInterval(SimTime);
-    cout << "Enably gravity (y/n)?"; cin >> GravitySwitch; Calculator.EnableGravity(GravitySwitch);
+    cout << "Enably gravity (y/n)? "; cin >> GravitySwitch; Calculator.EnableGravity(GravitySwitch);
     cout << "__________________________________________________" << endl;
 
     char name, DimensionSwitch;
@@ -62,9 +63,15 @@ int main(){
         }
     }
 
+    //Values decay problem need to be solved, could be:
+    // 1 - due to the conversion of degrees to radian
+    // 2 - Some array decay BS (maybe need to use const)
+    // 3 - both
+    // Update: setprecision(int) seems to help with it
+
     for(int i = 0; i < NumObjects; i++){
         for(int j = 0; j <= SimTime; j++){
-            cout << " >" << j << "  " << Calculator.GetXPoints(j) << endl;
+            cout << " >" << j << "  " << setprecision(4) << Calculator.GetXPoints(j) << endl;
         }
     }
 
