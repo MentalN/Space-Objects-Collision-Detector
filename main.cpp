@@ -61,6 +61,16 @@ int main(){
                     break;
             }
         }
+        //Returning trajectory values to spaceObject
+        for(int j = 0; j <= SimTime; j++){
+            SpaceObjects[i].SetTrajectories(Calculator.GetXPoints(j), Calculator.GetYPoints(j), Calculator.GetZPoints(j), j);
+        }
+    }
+
+    for(int i = 0; i < NumObjects; i++){
+        for(int j = 0; j <= SimTime; j++){
+            cout << " >" << j << "  " << setprecision(4) << SpaceObjects[i].GetXPoints(j) << endl;
+        }
     }
 
     //Values decay problem need to be solved, could be:
@@ -69,11 +79,14 @@ int main(){
     // 3 - both
     // Update: setprecision(int) seems to help with it
 
+    /*
+    //To view and verify outputted trajectory values
     for(int i = 0; i < NumObjects; i++){
         for(int j = 0; j <= SimTime; j++){
             cout << " >" << j << "  " << setprecision(4) << Calculator.GetXPoints(j) << endl;
         }
     }
+    */
 
 
 
