@@ -72,6 +72,8 @@ int main(){
             cout << " >" << j << "  " << setprecision(4) << SpaceObjects[i].GetXPoints(j) << endl;
         }
     }
+    Calculator.CleanUpWhendone();
+
 
     //Values decay problem need to be solved, could be:
     // 1 - due to the conversion of degrees to radian
