@@ -15,7 +15,7 @@ void SpaceObject::SetParameters(char name, double vo, double elev, double bear, 
     BearingAngle   = bear;
     Mass           = m;
 }
-void SpaceObject::SetDimensions(double l,double w, double h){
+void SpaceObject::SetDimensions(double l, double w, double h){
     Length = l;
     Width  = w;
     Height = h;
@@ -45,6 +45,8 @@ double SpaceObject::GetMass(){return Mass;}
 double SpaceObject::GetWidth(){return Width;}
 double SpaceObject::GetHeight(){return Height;}
 double SpaceObject::GetLength(){return Length;}
+int    SpaceObject::GetCollisionPoint(){return CollisionPoint;}
+
 ////Object's Trajectory
 double SpaceObject::GetXPoints(int  tp){return XTrajectoy[tp];}
 double SpaceObject::GetYPoints(int  tp){return YTrajectoy[tp];}
@@ -52,16 +54,27 @@ double SpaceObject::GetZPoints(int  tp){return ZTrajectoy[tp];}
 double SpaceObject::GetTimeLine(int tp){return TimeLine[tp];}
 ////Collision Detection Operator Overload
 bool   SpaceObject::operator==(const SpaceObject& SpObj){
-    if(this->XTrajectoy[ComparisonPoint]-0.50*Length <= SpObj.XTrajectoy[ComparisonPoint]+0.50*Length &&
-       this->YTrajectoy[ComparisonPoint]-0.50*Width  <= SpObj.YTrajectoy[ComparisonPoint]+0.50*Width  &&
-       this->ZTrajectoy[ComparisonPoint]-0.50*Height <= SpObj.ZTrajectoy[ComparisonPoint]+0.50*Height)
+    if(this->XTrajectoy[ComparisonPoint]-0.5*Length >= SpObj.XTrajectoy[ComparisonPoint]-0.5*(SpObj.Length) &&
+       this->XTrajectoy[ComparisonPoint]-0.5*Length <= SpObj.XTrajectoy[ComparisonPoint]+0.5*(SpObj.Length) &&
+       this->YTrajectoy[ComparisonPoint]-0.5*Width  >= SpObj.YTrajectoy[ComparisonPoint]-0.5*(SpObj.Width)  &&
+       this->YTrajectoy[ComparisonPoint]-0.5*Width  <= SpObj.YTrajectoy[ComparisonPoint]+0.5*(SpObj.Width)  &&
+       this->ZTrajectoy[ComparisonPoint]-0.5*Height >= SpObj.ZTrajectoy[ComparisonPoint]-0.5*(SpObj.Height) &&
+       this->ZTrajectoy[ComparisonPoint]-0.5*Height <= SpObj.ZTrajectoy[ComparisonPoint]+0.5*(SpObj.Height)){
+       CollisionPoint = ComparisonPoint;
+       return true;
+    }
+    else if(this->XTrajectoy[ComparisonPoint]+0.5*Length >= SpObj.XTrajectoy[ComparisonPoint]-(0.5*SpObj.Length) &&
+            this->XTrajectoy[ComparisonPoint]+0.5*Length <= SpObj.XTrajectoy[ComparisonPoint]+(0.5*SpObj.Length) &&
+            this->YTrajectoy[ComparisonPoint]+0.5*Width  >= SpObj.YTrajectoy[ComparisonPoint]-(0.5*SpObj.Width)  &&
+            this->YTrajectoy[ComparisonPoint]+0.5*Width  <= SpObj.YTrajectoy[ComparisonPoint]+(0.5*SpObj.Width)  &&
+            this->ZTrajectoy[ComparisonPoint]+0.5*Height >= SpObj.ZTrajectoy[ComparisonPoint]-(0.5*SpObj.Height) &&
+            this->ZTrajectoy[ComparisonPoint]+0.5*Height <= SpObj.ZTrajectoy[ComparisonPoint]+(0.5*SpObj.Height)){
+        CollisionPoint = ComparisonPoint;
         return true;
-    else if (this->XTrajectoy[ComparisonPoint]+0.50*Length >= SpObj.XTrajectoy[ComparisonPoint]-0.50*Length &&
-             this->YTrajectoy[ComparisonPoint]+0.50*Width  >= SpObj.YTrajectoy[ComparisonPoint]-0.50*Width  &&
-             this->ZTrajectoy[ComparisonPoint]+0.50*Height >= SpObj.ZTrajectoy[ComparisonPoint]-0.50*Height)
-        return true;
+    }
     else
         return false;
+
 }
 
 SpaceObject::~SpaceObject()
