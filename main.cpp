@@ -66,17 +66,37 @@ int main(){
             SpaceObjects[i].SetTrajectories(Calculator.GetXPoints(j), Calculator.GetYPoints(j), Calculator.GetZPoints(j), j);
         }
     }
+    int NumCollisions=0;
+    for(int i = 0; i < NumObjects; i++){
+        for(int j = 0; j < NumObjects; j++){
+            if(i==j)
+                break;
+            else{
+                for(int k = 0; k <= SimTime; k++){
+                    SpaceObjects[i].SetComparisonPoint(k);
+                    if(SpaceObjects[i]==SpaceObjects[j]){
+                        //NumCollisions++;
+                        cout << "collision detected at time " << SpaceObjects[i].GetCollisionPoint() << endl;
+                        break;
+                    }
+                    else
+                        continue;
+                }
+            }
+        }
+    }
 
+    //cout << "Number of collisions detected > " << NumCollisions << endl;
+
+    //Test outputted values from SpaceObject objects
     for(int i = 0; i < NumObjects; i++){
         for(int j = 0; j <= SimTime; j++){
             cout << " >" << j << "  " << setprecision(4) << SpaceObjects[i].GetXPoints(j) << endl;
         }
     }
-    Calculator.CleanUpWhendone();
-
 
     //Values decay problem need to be solved, could be:
-    // 1 - due to the conversion of degrees to radian
+    // 1 - due to the conversion of degrees to radian5
     // 2 - Some array decay BS (maybe need to use const)
     // 3 - both
     // Update: setprecision(int) seems to help with it
