@@ -33,6 +33,7 @@ public:
     double GetTimeLine(int);
     ////Collision Detection
     bool operator==(const SpaceObject&);
+    int  GetCollisionPoint();
     ~SpaceObject();
 
 protected:
@@ -49,6 +50,7 @@ protected:
     double *TimeLine;
     //Collision Detection
     int ComparisonPoint;
+    int CollisionPoint;
 };
 
 #endif // SPACEOBJECT_H
