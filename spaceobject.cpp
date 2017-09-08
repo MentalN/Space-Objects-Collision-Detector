@@ -54,21 +54,21 @@ double SpaceObject::GetZPoints(int  tp){return ZTrajectoy[tp];}
 double SpaceObject::GetTimeLine(int tp){return TimeLine[tp];}
 ////Collision Detection Operator Overload
 bool   SpaceObject::operator==(const SpaceObject& SpObj){
-    if(this->XTrajectoy[ComparisonPoint]-0.5*Length >= SpObj.XTrajectoy[ComparisonPoint]-0.5*(SpObj.Length) &&
-       this->XTrajectoy[ComparisonPoint]-0.5*Length <= SpObj.XTrajectoy[ComparisonPoint]+0.5*(SpObj.Length) &&
-       this->YTrajectoy[ComparisonPoint]-0.5*Width  >= SpObj.YTrajectoy[ComparisonPoint]-0.5*(SpObj.Width)  &&
-       this->YTrajectoy[ComparisonPoint]-0.5*Width  <= SpObj.YTrajectoy[ComparisonPoint]+0.5*(SpObj.Width)  &&
-       this->ZTrajectoy[ComparisonPoint]-0.5*Height >= SpObj.ZTrajectoy[ComparisonPoint]-0.5*(SpObj.Height) &&
-       this->ZTrajectoy[ComparisonPoint]-0.5*Height <= SpObj.ZTrajectoy[ComparisonPoint]+0.5*(SpObj.Height)){
+    if(this->XTrajectoy[ComparisonPoint]-0.5*(this->Length) >= SpObj.XTrajectoy[ComparisonPoint]-0.5*(SpObj.Length) &&
+       this->XTrajectoy[ComparisonPoint]-0.5*(this->Length) <= SpObj.XTrajectoy[ComparisonPoint]+0.5*(SpObj.Length) &&
+       this->YTrajectoy[ComparisonPoint]-0.5*(this->Width)  >= SpObj.YTrajectoy[ComparisonPoint]-0.5*(SpObj.Width)  &&
+       this->YTrajectoy[ComparisonPoint]-0.5*(this->Width)  <= SpObj.YTrajectoy[ComparisonPoint]+0.5*(SpObj.Width)  &&
+       this->ZTrajectoy[ComparisonPoint]-0.5*(this->Height) >= SpObj.ZTrajectoy[ComparisonPoint]-0.5*(SpObj.Height) &&
+       this->ZTrajectoy[ComparisonPoint]-0.5*(this->Height) <= SpObj.ZTrajectoy[ComparisonPoint]+0.5*(SpObj.Height)){
        CollisionPoint = ComparisonPoint;
        return true;
     }
-    else if(this->XTrajectoy[ComparisonPoint]+0.5*Length >= SpObj.XTrajectoy[ComparisonPoint]-(0.5*SpObj.Length) &&
-            this->XTrajectoy[ComparisonPoint]+0.5*Length <= SpObj.XTrajectoy[ComparisonPoint]+(0.5*SpObj.Length) &&
-            this->YTrajectoy[ComparisonPoint]+0.5*Width  >= SpObj.YTrajectoy[ComparisonPoint]-(0.5*SpObj.Width)  &&
-            this->YTrajectoy[ComparisonPoint]+0.5*Width  <= SpObj.YTrajectoy[ComparisonPoint]+(0.5*SpObj.Width)  &&
-            this->ZTrajectoy[ComparisonPoint]+0.5*Height >= SpObj.ZTrajectoy[ComparisonPoint]-(0.5*SpObj.Height) &&
-            this->ZTrajectoy[ComparisonPoint]+0.5*Height <= SpObj.ZTrajectoy[ComparisonPoint]+(0.5*SpObj.Height)){
+    else if(this->XTrajectoy[ComparisonPoint]+0.5*(this->Length) >= SpObj.XTrajectoy[ComparisonPoint]-0.5*(SpObj.Length) &&
+            this->XTrajectoy[ComparisonPoint]+0.5*(this->Length) <= SpObj.XTrajectoy[ComparisonPoint]+0.5*(SpObj.Length) &&
+            this->YTrajectoy[ComparisonPoint]+0.5*(this->Width)  >= SpObj.YTrajectoy[ComparisonPoint]-0.5*(SpObj.Width)  &&
+            this->YTrajectoy[ComparisonPoint]+0.5*(this->Width)  <= SpObj.YTrajectoy[ComparisonPoint]+0.5*(SpObj.Width)  &&
+            this->ZTrajectoy[ComparisonPoint]+0.5*(this->Height) >= SpObj.ZTrajectoy[ComparisonPoint]-0.5*(SpObj.Height) &&
+            this->ZTrajectoy[ComparisonPoint]+0.5*(this->Height) <= SpObj.ZTrajectoy[ComparisonPoint]+0.5*(SpObj.Height)){
         CollisionPoint = ComparisonPoint;
         return true;
     }
